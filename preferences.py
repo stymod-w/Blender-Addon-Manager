@@ -68,7 +68,7 @@ class ADDONMANAGER_preferences(AddonPreferences):
         box = layout.box()
         box.label(text="使用须知", icon='ERROR')
         box.label(text="1. 本插件会改变N面板上插件的显示顺序")
-        box.label(text="2. 被管理的插件在原N面板位置会被隐藏")
+        box.label(text="2. 被管理的插件在使用时会在原N面板位置会被隐藏")
         box.label(text="介意勿用！", icon='INFO')
         
         layout.separator()
