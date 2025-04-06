@@ -1,5 +1,3 @@
-简体中文 | [English Documentation](./Addon%20Manager_en/README.en.md)
-
 # Blender Addon Manager
 >此项目由AI辅助开发，本人提供思路和细节修正
 
