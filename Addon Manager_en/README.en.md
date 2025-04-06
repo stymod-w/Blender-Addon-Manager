@@ -17,18 +17,17 @@ Pain point: When there are too many N-panel addons in Blender, they become diffi
    - Reduce N-panel clutter and improve workspace organization
 
 2. **Category Filtering and Exclusion**
-   - Search for specific categories
+   - Search for categories
 
-   - Set default excluded categories to hide rarely used panels
+   - Set excluded categories to hide rarely used panels
 
-   - Flexibly select additional categories to exclude through the UI interface
+   - Flexibly select additional categories to exclude through the Preferences
 
 3. **Favorites Function**
    - Mark commonly used categories as favorites
 
    - Quick filter to show only favorite categories
 
-   - Save favorite lists through preferences
 
 4. **Auto-restore Function**
    - Automatically restore panels to their original positions when opening new files
