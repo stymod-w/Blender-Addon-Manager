@@ -1,7 +1,7 @@
 import bpy
 from bpy.types import Panel, UIList
 from bpy.app.handlers import persistent
-from . import common, preferences, operators
+from . import common, preferences, operators, translations
 
 # --- UIList 实现 ---
 class ADDONMANAGER_UL_category_list(UIList):
@@ -99,7 +99,7 @@ class ADDONMANAGER_PT_main(Panel):
             # 放在按钮同行右侧
             row.label(text="", icon='INFO') # 图标带默认 tooltip
             # 或者在下一行显示文字
-            layout.label(text="刷新来重置视图/释放插件", icon='INFO')
+            layout.label(text=translations.get_text("刷新来重置视图/释放插件"), icon='INFO')
         # 添加设置按钮，跳转到偏好设置
         show_favs_icon = 'SOLO_ON' if scene.addon_manager_show_favorites_only else 'SOLO_OFF'
         row.prop(
@@ -126,7 +126,7 @@ class ADDONMANAGER_PT_main(Panel):
         
         # 显示面板数量和排除信息
         row = list_box.row()
-        row.label(text=f"共找到{total_panels} 个", icon='PLUGIN')
+        row.label(text=translations.get_text("共找到{} 个").format(total_panels), icon='PLUGIN')
         
 
         list_box.template_list(
@@ -147,10 +147,10 @@ class ADDONMANAGER_PT_main(Panel):
              selected_category_name = scene.addon_manager_categories[scene.addon_manager_category_index].name
 
         if selected_category_name:
-            info_box.label(text=f"显示插件: '{selected_category_name}'", icon='INFO')
+            info_box.label(text=translations.get_text("显示插件: '{}'").format(selected_category_name), icon='INFO')
             #info_box.label(text=f"({len(common.currently_managed_panels)} panels managed)")
         else:
-            info_box.label(text="在此处查看其面板_刷新按钮释放插件.", icon='INFO')
+            info_box.label(text=translations.get_text("在此处查看其面板_刷新按钮释放插件."), icon='INFO')
 
 # 恢复面板函数 - 在注销插件前调用
 def restore_panels(force=False):

@@ -2,7 +2,7 @@ import bpy
 import traceback
 from bpy.types import Operator
 from bpy.props import IntProperty
-from . import common
+from . import common, translations
 
 # --- 操作符：刷新类别列表 ---
 class ADDONMANAGER_OT_refresh_categories(Operator):
@@ -283,8 +283,27 @@ class ADDONMANAGER_OT_apply_excluded_categories(Operator):
         #self.report({'INFO'}, f"已应用 {len(all_excluded)} 个排除类别")
         return {'FINISHED'}
 
+class ADDONMANAGER_OT_change_language(Operator):
+    bl_idname = "addonmanager.change_language"
+    bl_label = "Change Language"
+    bl_description = "切换插件界面语言"
+    bl_options = {'INTERNAL'}
+
+    def execute(self, context):
+        from . import translations, preferences
+        prefs = preferences.get_preferences()
+        print(f"切换语言到: {prefs.language}")
+        if prefs:
+            translations.switch_language(prefs.language)
+            print(f"语言已切换到: {prefs.language}")
+            # 刷新所有UI区域
+            for window in context.window_manager.windows:
+                for area in window.screen.areas:
+                    area.tag_redraw()
+        return {'FINISHED'}
 # 注册类列表
 classes = (
+    ADDONMANAGER_OT_change_language,
     ADDONMANAGER_OT_toggle_favorite,
     ADDONMANAGER_OT_refresh_categories,
     ADDONMANAGER_OT_scan_available_categories,

@@ -1,4 +1,4 @@
-[简体中文](../README.md) | English
+[简体中文](./README.md) | English
 # Blender Addon Manager
 > This project was developed with AI assistance, with human oversight and refinements.
 

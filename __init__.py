@@ -1,15 +1,15 @@
 bl_info = {
     "name": "Addon Manager",
     "author": "stymod",
-    "version": (0, 1, 0),
+    "version": (0, 1, 1),
     "blender": (4, 0, 0),
     "location": "View3D > Sidebar > Addon Mgr",
-    "description": "Manage and organize N-panel addons",
+    "description": "管理和组织N面板插件 Manage and organize N-panel addons",
     "category": "Interface",
 }
 
 import bpy
-from . import common, properties, operators, ui, preferences
+from . import common, properties, operators, ui, preferences, translations
 
 
 func_list = [
@@ -18,18 +18,20 @@ func_list = [
     ui, 
     preferences,
     ]
-
+# 注册函数
 def register():
+
+    translations.register_translations()
     for func in func_list:
         func.register()
     
-    # Load additional excluded categories from preferences
+    # 从偏好设置中加载额外排除的类别
     from . import common
     common.load_additional_excluded_from_preferences()
-    # Deferred refresh
+    # 延迟刷新
     def deferred_refresh():
         try:
-            # First scan available categories
+            # 先扫描可用类别
             bpy.ops.addonmanager.scan_available_categories()
             bpy.ops.addonmanager.apply_excluded_categories()
 
@@ -40,14 +42,17 @@ def register():
     
     bpy.app.timers.register(deferred_refresh, first_interval=0.1)
 
+# 注销函数
 def unregister():
-    # Restore panels first
+
+    translations.unregister_translations()
+    # 先恢复面板
     ui.restore_panels(force=True)
     
-    # Then unregister modules
+    # 然后注销各模块
     for func in reversed(func_list):
         func.unregister()
 
-# For testing only
+# 仅用于测试
 if __name__ == "__main__":
     register()
